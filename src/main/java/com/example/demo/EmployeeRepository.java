@@ -22,7 +22,7 @@ public class EmployeeRepository {
         Connection connection = null;
         String url = "jdbc:postgresql://localhost:5432/employee";
         String user = "postgres";
-        String password = "postgres";
+        String password = "Molly";
 
         try {
             connection = DriverManager.getConnection(url, user, password);
@@ -39,8 +39,8 @@ public class EmployeeRepository {
 
     public static int save(Employee employee) {
         int status = 0;
+        Connection connection = EmployeeRepository.getConnection();
         try {
-            Connection connection = EmployeeRepository.getConnection();
             PreparedStatement ps = connection.prepareStatement("insert into users(name,email,country) values (?,?,?)");
             ps.setString(1, employee.getName());
             ps.setString(2, employee.getEmail());
@@ -58,9 +58,9 @@ public class EmployeeRepository {
     public static int update(Employee employee) {
 
         int status = 0;
+        Connection connection = EmployeeRepository.getConnection();
 
         try {
-            Connection connection = EmployeeRepository.getConnection();
             PreparedStatement ps = connection.prepareStatement("update users set name=?,email=?,country=? where id=?");
             ps.setString(1, employee.getName());
             ps.setString(2, employee.getEmail());
@@ -79,9 +79,9 @@ public class EmployeeRepository {
     public static int delete(int id) {
 
         int status = 0;
+        Connection connection = EmployeeRepository.getConnection();
 
         try {
-            Connection connection = EmployeeRepository.getConnection();
             PreparedStatement ps = connection.prepareStatement("delete from users where id=?");
             ps.setInt(1, id);
             status = ps.executeUpdate();
@@ -97,9 +97,9 @@ public class EmployeeRepository {
     public static Employee getEmployeeById(int id) {
 
         Employee employee = new Employee();
+        Connection connection = EmployeeRepository.getConnection();
 
         try {
-            Connection connection = EmployeeRepository.getConnection();
             PreparedStatement ps = connection.prepareStatement("select * from users where id=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -120,9 +120,9 @@ public class EmployeeRepository {
     public static List<Employee> getAllEmployees() {
 
         List<Employee> listEmployees = new ArrayList<>();
+        Connection connection = EmployeeRepository.getConnection();
 
         try {
-            Connection connection = EmployeeRepository.getConnection();
             PreparedStatement ps = connection.prepareStatement("select * from users");
             ResultSet rs = ps.executeQuery();
 
