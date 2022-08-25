@@ -1,11 +1,11 @@
 package com.example.demo;
 
-public class Employee {
+public class Dog {
 
     private int id;
     private String name;
     private String country;
-    private String email;
+    private String owner;
 
     public int getId() {
         return id;
@@ -31,12 +31,12 @@ public class Employee {
         this.country = country;
     }
 
-    public String getEmail() {
-        return email;
+    public String getOwner() {
+        return owner;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setOwner(String email) {
+        this.owner = owner;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class Employee {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", country='" + country + '\'' +
-                ", email='" + email + '\'' +
+                ", email='" + owner + '\'' +
                 '}';
     }
 }

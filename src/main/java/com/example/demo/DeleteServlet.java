@@ -14,7 +14,7 @@ public class DeleteServlet extends HttpServlet {
 
         String sid = request.getParameter("id");
         int id = Integer.parseInt(sid);
-        EmployeeRepository.delete(id);
+        DogRepository.delete(id);
         response.sendRedirect("viewServlet");
     }
 }

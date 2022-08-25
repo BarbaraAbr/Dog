@@ -18,9 +18,9 @@ public class ViewByIDServlet extends HttpServlet {
         String sid = request.getParameter("id");
         int id = Integer.parseInt(sid);
 
-        Employee employee = EmployeeRepository.getEmployeeById(id);
+        Dog dog = DogRepository.getDogById(id);
 
-        out.print(employee);
+        out.print(dog);
         out.close();
     }
 }

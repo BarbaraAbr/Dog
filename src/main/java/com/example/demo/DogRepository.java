@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeRepository {
+public class DogRepository {
 
     /*public static void main(String[] args) {
         getConnection();
@@ -20,7 +20,7 @@ public class EmployeeRepository {
     public static Connection getConnection() {
 
         Connection connection = null;
-        String url = "jdbc:postgresql://localhost:5432/employee";
+        String url = "jdbc:postgresql://localhost:5432/dog";
         String user = "postgres";
         String password = "Molly";
 
@@ -37,13 +37,13 @@ public class EmployeeRepository {
         return connection;
     }
 
-    public static int save(Employee employee) {
+    public static int save(Dog employee) {
         int status = 0;
-        Connection connection = EmployeeRepository.getConnection();
+        Connection connection = DogRepository.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("insert into users(name,email,country) values (?,?,?)");
+            PreparedStatement ps = connection.prepareStatement("insert into dog(name,email,country) values (?,?,?)");
             ps.setString(1, employee.getName());
-            ps.setString(2, employee.getEmail());
+            ps.setString(2, employee.getOwner());
             ps.setString(3, employee.getCountry());
 
             status = ps.executeUpdate();
@@ -55,15 +55,15 @@ public class EmployeeRepository {
         return status;
     }
 
-    public static int update(Employee employee) {
+    public static int update(Dog employee) {
 
         int status = 0;
-        Connection connection = EmployeeRepository.getConnection();
+        Connection connection = DogRepository.getConnection();
 
         try {
-            PreparedStatement ps = connection.prepareStatement("update users set name=?,email=?,country=? where id=?");
+            PreparedStatement ps = connection.prepareStatement("update dog set name=?,owner=?,country=? where id=?");
             ps.setString(1, employee.getName());
-            ps.setString(2, employee.getEmail());
+            ps.setString(2, employee.getOwner());
             ps.setString(3, employee.getCountry());
             ps.setInt(4, employee.getId());
 
@@ -79,10 +79,10 @@ public class EmployeeRepository {
     public static int delete(int id) {
 
         int status = 0;
-        Connection connection = EmployeeRepository.getConnection();
+        Connection connection = DogRepository.getConnection();
 
         try {
-            PreparedStatement ps = connection.prepareStatement("delete from users where id=?");
+            PreparedStatement ps = connection.prepareStatement("delete from dog where id=?");
             ps.setInt(1, id);
             status = ps.executeUpdate();
 
@@ -94,54 +94,54 @@ public class EmployeeRepository {
         return status;
     }
 
-    public static Employee getEmployeeById(int id) {
+    public static Dog getDogById(int id) {
 
-        Employee employee = new Employee();
-        Connection connection = EmployeeRepository.getConnection();
+        Dog dog = new Dog();
+        Connection connection = DogRepository.getConnection();
 
         try {
-            PreparedStatement ps = connection.prepareStatement("select * from users where id=?");
+            PreparedStatement ps = connection.prepareStatement("select * from dog where id=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                employee.setId(rs.getInt(1));
-                employee.setName(rs.getString(2));
-                employee.setEmail(rs.getString(3));
-                employee.setCountry(rs.getString(4));
+                dog.setId(rs.getInt(1));
+                dog.setName(rs.getString(2));
+                dog.setOwner(rs.getString(3));
+                dog.setCountry(rs.getString(4));
             }
             connection.close();
 
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
-        return employee;
+        return dog;
     }
 
-    public static List<Employee> getAllEmployees() {
+    public static List<Dog> getAllDogs() {
 
-        List<Employee> listEmployees = new ArrayList<>();
-        Connection connection = EmployeeRepository.getConnection();
+        List<Dog> listDogs = new ArrayList<>();
+        Connection connection = DogRepository.getConnection();
 
         try {
-            PreparedStatement ps = connection.prepareStatement("select * from users");
+            PreparedStatement ps = connection.prepareStatement("select * from dog");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
 
-                Employee employee = new Employee();
+                Dog dog = new Dog();
 
-                employee.setId(rs.getInt(1));
-                employee.setName(rs.getString(2));
-                employee.setEmail(rs.getString(3));
-                employee.setCountry(rs.getString(4));
+                dog.setId(rs.getInt(1));
+                dog.setName(rs.getString(2));
+                dog.setOwner(rs.getString(3));
+                dog.setCountry(rs.getString(4));
 
-                listEmployees.add(employee);
+                listDogs.add(dog);
             }
             connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return listEmployees;
+        return listDogs;
     }
 }

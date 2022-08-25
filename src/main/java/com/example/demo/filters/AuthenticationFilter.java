@@ -29,13 +29,14 @@ public class AuthenticationFilter implements Filter {
 
         HttpSession session = req.getSession(false);
 
-//        if (session == null && !(uri.endsWith("demo/saveServlet") || uri.endsWith("demo/loginServlet") || uri.endsWith("demo/viewServlet"))) {
+//        if (session == null && !(uri.endsWith("demo/saveServlet") || uri.endsWith("demo/loginServlet") || uri.endsWith("demo/viewServlet")|| uri.endsWith("demo/deleteServlet") || uri.endsWith("demo/putServlet"))) {
 //            this.context.log("<<< Unauthorized access request");
-//            PrintWriter out = res.getWriter();
+//           PrintWriter out = res.getWriter();
 //            out.println("No access!!!");
-//        } else {
+//       } else
+//       {
 //            chain.doFilter(request, response);
-//        }
+//       }
     }
 
     public void destroy() {

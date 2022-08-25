@@ -21,15 +21,16 @@ public class PutServlet extends HttpServlet {
         int id = Integer.parseInt(sid);
 
         String name = request.getParameter("name");
-        String email = request.getParameter("email");
+        String owner = request.getParameter("owner");
+        String country = request.getParameter("country");
 
-        Employee employee = new Employee();
-        employee.setId(id);
-        employee.setName(name);
-        employee.setEmail(email);
-        employee.setCountry(request.getParameter("country"));
+        Dog dog = new Dog();
+        dog.setId(id);
+        dog.setName(name);
+        dog.setOwner(owner);
+        dog.setCountry(country);
 
-        int status = EmployeeRepository.update(employee);
+        int status = DogRepository.update(dog);
 
         if (status > 0) {
             response.sendRedirect("viewServlet");
