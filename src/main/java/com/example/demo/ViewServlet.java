@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import lombok.Cleanup;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,7 @@ public class ViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html");
+        @Cleanup
         PrintWriter out = response.getWriter();
 
         List<Dog> list = DogRepository.getAllDogs();
@@ -22,6 +25,6 @@ public class ViewServlet extends HttpServlet {
         for (Dog dog : list) {
             out.print(dog);
         }
-        out.close();
+       // out.close();
     }
 }

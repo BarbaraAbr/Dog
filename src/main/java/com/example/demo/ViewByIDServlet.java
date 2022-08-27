@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import lombok.Cleanup;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,8 @@ public class ViewByIDServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+       @Cleanup
+       PrintWriter out = response.getWriter();
 
         String sid = request.getParameter("id");
         int id = Integer.parseInt(sid);
@@ -21,6 +24,6 @@ public class ViewByIDServlet extends HttpServlet {
         Dog dog = DogRepository.getDogById(id);
 
         out.print(dog);
-        out.close();
+        //out.close();
     }
 }

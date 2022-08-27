@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import lombok.Cleanup;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +19,8 @@ public class SaveServlet extends HttpServlet {
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
 
-        PrintWriter out = response.getWriter();
+       @Cleanup
+       PrintWriter out = response.getWriter();
 
         String name = request.getParameter("name");
         String owner = request.getParameter("owner");
@@ -40,6 +43,6 @@ public class SaveServlet extends HttpServlet {
         } else {
             out.println("Sorry! unable to save record");
         }
-        out.close();
+        //out.close();
     }
 }

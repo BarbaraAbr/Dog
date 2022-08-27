@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import lombok.Cleanup;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,7 @@ public class PutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html");
+        @Cleanup
         PrintWriter out = response.getWriter();
 
         String sid = request.getParameter("id");
@@ -37,6 +40,6 @@ public class PutServlet extends HttpServlet {
         } else {
             out.println("Sorry! unable to update record");
         }
-        out.close();
+       // out.close();
     }
 }
